@@ -9,7 +9,7 @@ export function getRazorpayInstance() {
   }
   return razorpayInstance;
 }
-export async function createRazorpayOrder(amount, currency = 'INR', receipt = '', notes = ) {
+export async function createRazorpayOrder(amount, currency = 'INR', receipt = '', notes = {}) {
   const razorpay = getRazorpayInstance();
   const options = {
     amount: amount * 100, 
