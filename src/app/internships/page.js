@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import InternshipCard from '@/components/internships/InternshipCard';
@@ -18,7 +18,7 @@ const sortOptions = [
   { value: 'stipend_low', label: 'Lowest Stipend' },
   { value: 'deadline', label: 'Deadline' },
 ];
-export default function InternshipsPage() {
+function InternshipsContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const [internships, setInternships] = useState([]);
@@ -162,5 +162,13 @@ export default function InternshipsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function InternshipsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>}>
+      <InternshipsContent />
+    </Suspense>
   );
 }
